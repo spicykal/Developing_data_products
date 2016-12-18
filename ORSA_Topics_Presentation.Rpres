@@ -1,0 +1,54 @@
+Shiny App Using Titanic Data (Machine Learning)
+========================================================
+author: Calvin K. Hutto 
+date: 18 December 2016
+autosize: true
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE)
+trainSet <- read.table("train.csv", sep = ",", header = TRUE, na.strings=c(""))  ## read in training data set
+testSet <- read.table("test.csv", sep = ",", header = TRUE) ## read in test data set
+library('dplyr')
+library('pander')
+library('xtable')
+library('knitr')
+library('mice')
+library('randomForest')
+library('ggplot2') # visualization
+library('ggthemes') # visualization
+library('scales') # visualization
+Alldata <- bind_rows(trainSet, testSet)
+```
+Passenger Class vs Survival 
+========================================================
+*This is one small part of what shiny can do  
+*All this neat code is running in the background   
+*All you have to do is move the slider
+
+```{r pclass, echo = TRUE}
+X <- as.matrix(table(trainSet[,c("Survived", "Pclass")]))  ## quick data frame from table to compare survival to passenger class
+colnames(X) <- c("1st", "2nd", "3rd")
+rownames(X) <- c("Died", "Survived")
+kable(X)  ## makes pre-formatted table to knit into html  
+```
+
+
+Determine Probability of Survival As a Passenger on the Titanic
+========================================================
+*This shiny app allows you to adjust for several variables  
+
+  -Gender  
+  -Age  
+  -Passenger Class  
+  -Fare Rate  
+  -Port of Embarkation  
+
+*Based on these inputs, the app predicts the probability of survival of a passenger with those characteristics
+
+Machine Learning will Solve All of Our Data Problems
+========================================================
+*The Titanic application also gives you a prediction interval  
+
+-We want to know how sure we are of our prediction  
+-Many other applications of this technology  
+-Leveraging big data 
+
